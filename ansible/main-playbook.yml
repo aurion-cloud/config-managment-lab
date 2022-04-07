@@ -1,0 +1,12 @@
+---
+- hosts: web_servers
+  become: true
+  tasks:
+    - name: Update apt-get(yum in centos) repository
+      apt:
+        update_cache: yes
+
+    - name: Install nginx
+      apt:
+        name: "nginx"
+        state: present
