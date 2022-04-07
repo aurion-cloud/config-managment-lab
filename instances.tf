@@ -8,6 +8,6 @@
   key_name               = var.my_keypair
 
   tags = {
-      Name = "public_web_server_${count.index + 1}"
+      Name = "ansible_web_server_${count.index + 1}"
   }
 }

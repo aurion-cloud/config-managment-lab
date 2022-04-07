@@ -24,6 +24,6 @@ variable "public_webserver_name" {
 }
 
 variable "my_keypair" {
-    default= "myec2keypair"
+    default= "my_keypair"
 }
 
