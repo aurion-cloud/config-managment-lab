@@ -20,3 +20,24 @@
       with_items:
         - "/etc/nginx/sites-enabled/default"
         - "/etc/nginx/sites-available/default"
+    
+    - name: Add webpage to servers
+      copy:
+        src: "index.html"
+        dest: "/var/www/{ website_name }/index.html"
+
+    - name: Configure nginx with new config file
+      template: 
+        src: "default.tpl"
+        dest: "etc/nginx/sites-available/"
+
+    # - name: Create symlink for config file
+    #   file:
+    #     src: "/etc/nginx/sites-available/{ website_name }"
+    #     dest: "/etc/nginx/sites-available/{ website_name }"
+    #     state: link
+
+    # - name: Restart nginx service
+    #   service:
+    #     name: "nginx"
+    #     state: restarted
