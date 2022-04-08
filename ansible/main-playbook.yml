@@ -10,7 +10,7 @@
 
     - name: Create folder for website
       file: 
-        path: "/var/www/{ website_name }"
+        path: "/var/www/{{ website_name }}"
         state: directory
 
     - name: Delete sites-enable and sites-available files
@@ -24,20 +24,20 @@
     - name: Add webpage to servers
       copy:
         src: "index.html"
-        dest: "/var/www/{ website_name }/index.html"
+        dest: "/var/www/{{ website_name }}/index.html"
 
     - name: Configure nginx with new config file
       template: 
         src: "default.tpl"
-        dest: "etc/nginx/sites-available/"
+        dest: "/etc/nginx/sites-available/{{ website_name }}"
 
-    # - name: Create symlink for config file
-    #   file:
-    #     src: "/etc/nginx/sites-available/{ website_name }"
-    #     dest: "/etc/nginx/sites-available/{ website_name }"
-    #     state: link
+    - name: Create symlink for config file
+      file:
+        src: "/etc/nginx/sites-available/{{ website_name }}"
+        dest: "/etc/nginx/sites-enabled/{{ website_name }}"
+        state: link
 
-    # - name: Restart nginx service
-    #   service:
-    #     name: "nginx"
-    #     state: restarted
+    - name: Restart nginx service
+      service:
+        name: "nginx"
+        state: restarted
